@@ -1,5 +1,7 @@
 ﻿module Utils
 
+open System
+
 let sum list =
    let rec loop list acc =
        match list with
@@ -50,3 +52,19 @@ let listRotate l =
 
 let rec listRotations list times =
     if times = 0 then [list] else List.append [list] (listRotations (listRotate list) (times - 1))
+
+let convtobin n =
+    let rec inner n acc cont =
+        match n with
+        | 0 -> [0]
+        | 1 -> [1]
+        | n -> List.append (inner (n/2) acc (fun () -> cont())) [n % 2] 
+    inner n [] (fun () -> [n % 2])
+
+let squaredigitsandsum n =
+    n.ToString() |> Seq.map (fun e -> Int32.Parse(e.ToString())) |> Seq.map (fun e -> e*e) |> Seq.sum
+
+//Coprime generator for some number theory problems 71 onwards, need to reimplement this using continuations
+let rec gencoprime m n max =
+    if m > max then [] else
+        List.append (List.append ([(m,n)]) (gencoprime (2*m - n) m max)) (List.append (gencoprime (2*m + n) m max) (gencoprime (m + 2*n) n max))

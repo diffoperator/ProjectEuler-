@@ -2,6 +2,19 @@
 
 open System.Collections.Generic
 
+//Problem 92 (Takes 30 seconds to compute, although within the 1 min timeframe perf not comparable to other solutions which crank out in less that 2-3 seconds)
+let projecteuler92_soln1 =
+    let cache = Dictionary<int, int>()
+    cache.[1] <- 1
+    cache.[89] <- 89
+    let rec squareandsumnum n =
+        match n with
+        | 1 -> 1
+        | 89 -> 89
+        | n when cache.ContainsKey(n) -> cache.[n]
+        | n -> cache.[n] <- squareandsumnum (Utils.squaredigitsandsum n); cache.[n]
+    seq { 1 .. 10000000 } |> Seq.map (fun e -> squareandsumnum e) |> Seq.filter (fun e -> e = 89) |> Seq.length
+
 //Problem 95
 let projecteuler95_soln1 = 
     let cache = Dictionary<int, int>()
@@ -27,4 +40,5 @@ let projecteuler97_soln1 =
     let nthpowermod n m t = 
         seq { 1 .. m } |> Seq.fold ( fun acc e -> (n*acc % t)) 1
     (28433 * (nthpowermod 2 7830457 1000000000))%1000000000 + 1;;
+    
 

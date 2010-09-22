@@ -1,5 +1,9 @@
 ﻿module ProjectEuler5
 
+//Problem 52 (WTF is this? Make it beautiful!)
+let projecteuler52_soln1 =
+    seq { 1 .. 1000000 } |> Seq.filter (fun e -> ((e*2).ToString() |> Seq.sort |> Seq.toList) = ((e*3).ToString() |> Seq.sort |> Seq.toList) && ((e*4).ToString() |> Seq.sort |> Seq.toList) = ((e*5).ToString() |> Seq.sort |> Seq.toList))
+
 //Problem 53
 let projecteuler53_soln1 = 
     let ncr n r =
@@ -32,5 +36,3 @@ let projecteuler58_soln1 =
             if i%2I <> 0I then
                 for j in 1I .. 3I do
                     if (i*i % (j*i-j) <> 0I) then yield (i*i-j*i+j)] |> List.fold ( fun (primes,total) e -> if ((e%2I<>0I) && (Utils.isprime e)) then (primes+1, total+1) else (primes, total+1)) (0,0);;
-
-//

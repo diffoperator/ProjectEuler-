@@ -78,8 +78,19 @@ let projecteuler16_soln2 =
     (2I ** 1000).ToString().ToCharArray() |> Seq.fold ( fun acc e -> acc + System.Int32.Parse(e.ToString())) 0;; 
 
 //Problem 17
+//Fill up cache with base values 1 2 3 4...19 and the tens and hundreds, also we are counting spaces
+let projecteuler17_soln1 =
+    let cache = Dictionary<int, string>()
+    let rec convnumtoword n m =
+        if cache.ContainsKey(n) then cache.[n] else
+            if m = 100 && m < n then
+                cache.[(n / m) * m] + " and " + convnumtoword (n % m) (m/10)
+            else
+                cache.[(n / 10) * 10] + " " + convnumtoword (n % 10) (m/10)
+    ([1 .. 999] |> List.map (fun e -> (convnumtoword e 100) |> Seq.length) |> List.sum) + 12
 
 //Problem 18
+//This is a trivial DP problem that i have no interest in doing (ie left as an exercise for the gentle reader)
 
 //Problem 19
 

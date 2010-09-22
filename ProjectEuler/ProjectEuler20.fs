@@ -28,13 +28,10 @@ let projecteuler25_soln1 =
     if (snd state > 4000000) then None
     else Some(fst state + snd state, (snd state, fst state + snd state))) (1,1)) |> Seq.filter ( fun x -> (x.ToString() |> Seq.length) > 1000) |> Seq.head
 
-//Problem 27 (TODO Move prime assertion to utils and print the actual answer instead of the number of primes)
+//Problem 27 (TODO print the actual answer instead of the number of primes)
 let projecteuler27_soln1 =
-    let isprime n =
-        let max = int(System.Math.Ceiling(System.Math.Sqrt(float(n))))
-        if( (seq { 2.. max } |> Seq.filter ( fun e -> n % e = 0) |> Seq.length) > 0 ) then false else true
     let generateNumbers (a:int) (b:int) =
-        (Seq.unfold (fun state -> if isprime(state*state + a*state + b) then Some(state,state+1) else None) 0 |> Seq.length)
+        (Seq.unfold (fun state -> if Utils.isprime(state*state + a*state + b) then Some(state,state+1) else None) 0 |> Seq.length)
     [ for i in -70 .. 70 do
         for j in i*i/4 .. 1000 do
             if i <> 0 && j <> 0 then yield (i,j) ] |> List.map ( fun (i,j) -> generateNumbers i j) |> List.max
