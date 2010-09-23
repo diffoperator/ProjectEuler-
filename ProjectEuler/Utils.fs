@@ -11,14 +11,6 @@ let sum list =
 
 let reduceAddNumList acc i = acc + i
 
-let primefactors n = 
-    let max = int( System.Math.Ceiling ( System.Math.Sqrt (n)))
-    let rec factorlist n max =
-        if n = 1.0 then [] else
-            let a = [2 ..max] |> List.find (fun x -> n % float(x) = 0.0)
-            a :: factorlist (n / float(a)) max
-    factorlist n max
-
 let ispalindrome l = 
     if (List.rev l) = l then true else false
     
@@ -68,3 +60,12 @@ let squaredigitsandsum n =
 let rec gencoprime m n max =
     if m > max then [] else
         List.append (List.append ([(m,n)]) (gencoprime (2*m - n) m max)) (List.append (gencoprime (2*m + n) m max) (gencoprime (m + 2*n) n max))
+
+let primefactors n =
+    [2I .. n/2I] |> List.filter (fun e -> isprime e) |> List.filter (fun e -> n % e = 0I)
+
+let eulertotient n =
+    match (isprime n) with
+    | true -> n - 1I
+    | false -> (primefactors n) |> List.fold (fun acc e -> acc*(e - 1I)/e) n
+    
