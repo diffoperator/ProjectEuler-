@@ -69,3 +69,6 @@ let eulertotient n =
     | true -> n - 1I
     | false -> (primefactors n) |> List.fold (fun acc e -> acc*(e - 1I)/e) n
     
+let ispentagonal n = 
+    let value = (Math.Sqrt(24.0*n + 1.0) + 1.0)/6.0
+    if Math.Floor (value) = value then true else false;;
