@@ -30,7 +30,7 @@ let rec listtoint (n:list<int>) acc =
 
 let numdigit (n:bigint) =
     n.ToString().ToCharArray() |> Seq.fold ( fun acc e -> acc + 1) 0
-
+   
 let SumDigits(x:bigint) =            
     x.ToString().ToCharArray() |> Seq.fold ( fun acc e -> acc + System.Int32.Parse(e.ToString())) 0
 
@@ -44,7 +44,7 @@ let listRotate l =
 
 let rec listRotations list times =
     if times = 0 then [list] else List.append [list] (listRotations (listRotate list) (times - 1))
-
+    
 let convtobin n =
     let rec inner n acc cont =
         match n with
@@ -72,3 +72,15 @@ let eulertotient n =
 let ispentagonal n = 
     let value = (Math.Sqrt(24.0*n + 1.0) + 1.0)/6.0
     if Math.Floor (value) = value then true else false;;
+
+let compress l =
+    let rec inner lst cur acc =    
+        match lst with
+        | [] -> [(cur,acc)]
+        | h::t -> if (h = cur) then (inner t h (acc + 1)) else (cur, acc)::(inner t h 1)
+    inner l (l |> List.head) 0;;
+
+let rec findfactors n acc =
+    match n with
+    | 1 -> []
+    | _ -> if (n % acc = 0) then List.append [acc] (findfactors (n/acc) acc) else (findfactors n (acc + 1));;

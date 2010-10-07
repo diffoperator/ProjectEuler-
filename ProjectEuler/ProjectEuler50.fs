@@ -30,6 +30,13 @@ let projecteuler56_soln1 =
        for j in 1 .. 100 do
             yield (i,j) ] |> List.map ( fun (a,b) -> Utils.SumDigits(bigint(a) ** b)) |> List.max;;
 
+//Problem 57
+let projecteuler57_soln1 = 
+    let expand n =
+        Seq.unfold (fun (num, den) -> Some((num, den), (den*2I + num, den + num))) (3I, 2I) |> Seq.take n
+    expand 1000 |> Seq.filter (fun (num, denom) -> num.ToString().Length > denom.ToString().Length) |> Seq.length
+
+
 //Problem 58 (Is this correct? Probably not. Doesnt give the answer it is supposed to anyway)
 let projecteuler58_soln1 = 
     [for i in 3I .. 30001I do

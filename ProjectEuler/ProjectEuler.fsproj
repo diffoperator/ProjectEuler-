@@ -55,7 +55,10 @@
     <Compile Include="ProjectEuler100.fs" />
     <Compile Include="ProjectEuler120.fs" />
     <Compile Include="ProjectEuler70.fs" />
+    <Compile Include="ProjectEuler80.fs" />
+    <Compile Include="ProjectEuler170.fs" />
     <Compile Include="Program.fs" />
+    <Compile Include="ProjectEuler160.fs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\FSharp\1.0\Microsoft.FSharp.Targets" Condition="!Exists('$(MSBuildBinPath)\Microsoft.Build.Tasks.v4.0.dll')" />
   <Import Project="$(MSBuildExtensionsPath32)\..\Microsoft F#\v4.0\Microsoft.FSharp.Targets" Condition=" Exists('$(MSBuildBinPath)\Microsoft.Build.Tasks.v4.0.dll')" />
